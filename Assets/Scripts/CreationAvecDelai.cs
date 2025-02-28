@@ -6,29 +6,37 @@ public class CreationAvecDelai : MonoBehaviour
 {
     [SerializeField ] private GameObject _objetACreer;
     [SerializeField] private GameObject _objetPlacemenent;
+    private int _monnaies;
 
     void Start()
     {
-        // Éxecute la méthode CreerObjet après un délai de 5s
-        Invoke("CreerObjet", 5f);
-        // Éxecute la méthode CreerObjet après un délai initiale de 3s et à chaque 1s après
+        // ï¿½xecute la mï¿½thode CreerObjet aprï¿½s un dï¿½lai de 5s
+        //Invoke("CreerObjet", 5f);
+        // ï¿½xecute la mï¿½thode CreerObjet aprï¿½s un dï¿½lai initiale de 3s et ï¿½ chaque 1s aprï¿½s
         InvokeRepeating("CreerObjet", 3f, 1f);
+        //_monnaies = 0;
         // Cancelle tous les Invoke() actifs
-        CancelInvoke();
+        //CancelInvoke();
     }
 
     void CreerObjet()
     {
-        // Instancie un nouveau objet et garde une référence à lui
+        // Instancie un nouveau objet et garde une rï¿½fï¿½rence ï¿½ lui
         GameObject nouvelleCopie = Instantiate(_objetACreer, _objetPlacemenent.transform.position, _objetPlacemenent.transform.rotation);
 
-        // Prends une référence a le Rigidbody attaché au nouveau objet
+        // Prends une rï¿½fï¿½rence a le Rigidbody attachï¿½ au nouveau objet
         Rigidbody _rbNouvelleCopie = nouvelleCopie.GetComponent<Rigidbody>();
-
-        // Applique une force de translation initiale aléatoire
+        // Applique une force de translation initiale alï¿½atoire
         _rbNouvelleCopie.AddRelativeForce(0, 2f + Random.value, 0, ForceMode.Impulse);
 
-        // Applique une force de rotation initiale aléatoire
+        // Applique une force de rotation initiale alï¿½atoire
         _rbNouvelleCopie.AddRelativeTorque(0f, Random.value, Random.value, ForceMode.Impulse);
+        
+        _monnaies += 1;
+
+        //if(_monnaies == 10)
+        //{
+          //  CancelInvoke();
+        //}
     }
 }
